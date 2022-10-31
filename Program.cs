@@ -13,20 +13,46 @@
             Console.CursorLeft--;
         }
 
-        private static void CharacterMove(ref int x, ref int y, ref char[,] map)
+        private static void CharacterMove(ref int x, ref int y, ref char[,] map, ref bool canGoOut)
         {
             var tempX = x;
             var tempY = y;
 
-            if (map[Console.CursorTop, Console.CursorLeft] != '█')
+            switch (Console.ReadKey().Key)
             {
-                CharacterMoveDisplay(Console.CursorLeft, Console.CursorTop, ref map, '☻');
+                case ConsoleKey.UpArrow:
+                    y--;
+                    break;
+                case ConsoleKey.DownArrow:
+                    y++;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    x--;
+                    break;
+                case ConsoleKey.RightArrow:
+                    x++;
+                    break;
+            }
+
+            if (map[y, x] == '†')
+            {
+                canGoOut = true;
+            }
+
+            if ((map[y, x] != '‡' || canGoOut) && map[y, x] != '█')
+            {
+                CharacterMoveDisplay(x, y, ref map, '☻');
                 if (map[y, x] != '‡')
                 {
                     x = Console.CursorLeft;
                     y = Console.CursorTop;
                 }
                 CharacterMoveDisplay(tempX, tempY, ref map, ' ');
+            }
+            else
+            {
+                x = tempX;
+                y = tempY;
             }
         }
         static void Main(string[] args)
@@ -114,36 +140,7 @@
                 {
                     Console.SetCursorPosition(characterX, characterY);
 
-                    switch (Console.ReadKey().Key)
-                    {
-                        case ConsoleKey.UpArrow:
-                            Console.CursorTop--;
-                            break;
-                        case ConsoleKey.DownArrow:
-                            Console.CursorTop++;
-                            break;
-                        case ConsoleKey.LeftArrow:
-                            Console.CursorLeft--;
-                            break;
-                        case ConsoleKey.RightArrow:
-                            Console.CursorLeft++;
-                            break;
-                    }
-
-                    if (map[Console.CursorTop, Console.CursorLeft] == '†')
-                    {
-                        canGoOut = true;
-                    }
-
-                    if (map[Console.CursorTop, Console.CursorLeft] != '‡' || canGoOut)
-                    {
-                        CharacterMove(ref characterX, ref characterY, ref map);
-                    }
-                    else
-                    {
-                        Console.CursorTop = characterY;
-                        Console.CursorLeft = characterX;
-                    }
+                    CharacterMove(ref characterX, ref characterY, ref map, ref canGoOut);
 
                     if (map[characterY, characterX] == '‡')
                     {
@@ -156,9 +153,9 @@
                 Console.SetCursorPosition(27, 9);
                 Console.Write("Вы прошли лабиринт!");
                 Console.SetCursorPosition(1, 10);
-                Console.Write("Для возвращения к выбору уровня нажмите Enter, для завершения любую клавишу.");
+                Console.Write("Для завершения нажмите Enter, для возвращения к выбору уровня любую клавишу.");
 
-                if (Console.ReadKey().Key != ConsoleKey.Enter)
+                if (Console.ReadKey().Key == ConsoleKey.Enter)
                 {
                     Console.Clear();
                     break;
