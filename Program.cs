@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MazeRunner
+﻿namespace MazeRunner
 {
     internal class Program
     {
