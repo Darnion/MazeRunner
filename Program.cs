@@ -78,13 +78,13 @@
                 switch (lvlNum)
                 {
                     case "1":
-                        mazeLevel = Properties.Resources.levelOne.Split();
+                        mazeLevel = Properties.Resources.levelOne.Split().Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         break;
                     case "2":
-                        mazeLevel = Properties.Resources.levelTwo.Split();
+                        mazeLevel = Properties.Resources.levelTwo.Split().Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         break;
                     default:
-                        mazeLevel = Properties.Resources.levelThree.Split();
+                        mazeLevel = Properties.Resources.levelThree.Split().Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         break;
                 }
 
