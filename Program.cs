@@ -18,7 +18,7 @@
             var tempX = x;
             var tempY = y;
 
-            switch (Console.ReadKey().Key)
+            switch (Console.ReadKey(false).Key)
             {
                 case ConsoleKey.UpArrow:
                     y--;
@@ -78,13 +78,13 @@
                 switch (lvlNum)
                 {
                     case "1":
-                        mazeLevel = File.ReadAllLines(Properties.Resources.levelOne);
+                        mazeLevel = Properties.Resources.levelOne.Split();
                         break;
                     case "2":
-                        mazeLevel = File.ReadAllLines(Properties.Resources.levelTwo);
+                        mazeLevel = Properties.Resources.levelTwo.Split();
                         break;
                     default:
-                        mazeLevel = File.ReadAllLines(Properties.Resources.levelThree);
+                        mazeLevel = Properties.Resources.levelThree.Split();
                         break;
                 }
 
