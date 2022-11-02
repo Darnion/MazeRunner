@@ -78,13 +78,13 @@
                 switch (lvlNum)
                 {
                     case "1":
-                        mazeLevel = File.ReadAllLines(@"../../../resources/levels/levelOne.txt");
+                        mazeLevel = File.ReadAllLines(Properties.Resources.levelOne);
                         break;
                     case "2":
-                        mazeLevel = File.ReadAllLines(@"../../../resources/levels/levelTwo.txt");
+                        mazeLevel = File.ReadAllLines(Properties.Resources.levelTwo);
                         break;
                     default:
-                        mazeLevel = File.ReadAllLines(@"../../../resources/levels/levelThree.txt");
+                        mazeLevel = File.ReadAllLines(Properties.Resources.levelThree);
                         break;
                 }
 
